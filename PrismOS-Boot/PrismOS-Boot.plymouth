@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=PrismOS-Boot
+Description=The boot screen for the PrismOS operating system.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/PrismOS-Boot
+ScriptFile=/usr/share/plymouth/themes/PrismOS-Boot/PrismOS-Boot.script
