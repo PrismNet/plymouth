@@ -1,6 +1,6 @@
 [Plymouth Theme]
 Name=PrismOS-Boot
-Description=The boot screen for the PrismOS operating system.
+Description=Plymouth Boot Screen For PrsimOS
 ModuleName=script
 
 [script]
