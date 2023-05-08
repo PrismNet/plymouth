@@ -1,38 +1,34 @@
 Window.SetBackgroundTopColor (0, 0, 0);
 Window.SetBackgroundBottomColor (0, 0, 0);
-for(i = 1; i <= 614; i++)
+
+t = 0;
+
+fun update ()
 {
-  image[i].image = Image("image-" + i + ".png");
-  image[i].sprite = Sprite(image[i].image);
-  image[i].sprite.SetOpacity(0);
-  image[i].x = Window.GetX() + Window.GetWidth() / 2 - image[i].image.GetWidth() / 2;
-  image[i].y = Window.GetY() + Window.GetHeight() / 2 - image[i].image.GetHeight() / 2;
-  image[i].sprite.SetPosition(image[i].x, image[i].y, 0);
+    t++;
+
 }
 
-index = 1;
-fun boot_callback()
-{
-  if(index >= 614 + 1)
-  {
-    index = 1;
-  }
-  else
-  {
-    for(i = 1; i <= 614; i++)
+Plymouth.SetRefreshFunction (update);
+
+if (Plymouth.GetMode () == "boot"){
+ipb = Image ("Black Progress Bar.png");
+    pb = ipb.Scale (1 , 3);
+    pb = Sprite (ipb);
+    pb.SetX (Window.GetWidth ()  / 2 - 50);
+    pb.SetY ((Window.GetHeight() * (2/3)) - ipb.GetHeight() / 2);
+
+    fun progress_callback (duration, progress)
     {
-      if(index != i)
-      {
-        image[i].sprite.SetOpacity(0);
-      }
-      else
-      {
-        image[i].sprite.SetOpacity(1);
-      }
+         pb.SetImage(ipb.Scale ( progress * 100, 3));
     }
-    index++;
-  }
+    Plymouth.SetBootProgressFunction(progress_callback);
+}else if (Plymouth.GetMode () == "shutdown"){
+ #ShowSuspendBackground();
+}else if (Plymouth.GetMode () == "suspend"){
+ #ShowSuspendBackground();
+}else if (Plymouth.GetMode () == "resume"){
+ #ShowSuspendBackground();
+}else{
+ #ShowSuspendBackground();
 }
-
-Plymouth.SetRefreshFunction(boot_callback);
-Plymouth.SetQuitFunction(boot_callback);

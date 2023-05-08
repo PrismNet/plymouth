@@ -1,0 +1,1 @@
+ ffmpeg -f lavfi -i color=c=000000:s=1280x720:d=4 -loop 1 -i 'Background Rotate.png' -filter_complex "[1]rotate=angle=90*PI/180*t:fillcolor=none:ow='hypot(iw,ih)':oh=ow[fg];[0][fg]overlay=x=(W-w)/2:y=(H-h)/2:shortest=1:format=auto,format=yuv420p" -r 16 -movflags +faststart Background-Rotate/rotate_%03d.png
