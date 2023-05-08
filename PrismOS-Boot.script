@@ -1,11 +1,15 @@
 Window.SetBackgroundTopColor (0, 0, 0);
 Window.SetBackgroundBottomColor (0, 0, 0);
-
-t = 0;
+bg_image = Image ("Background.png");
+bg_image = bg_image.Scale (Window.GetWidth ()+100,Window.GetHeight ()+100);
+bg =  Sprite (bg_image);
+bg.SetZ (-10);
+bg.SetX (Window.GetWidth ()  / 2 - bg.GetImage().GetWidth()  / 2);
+bg.SetY (Window.GetHeight () / 2 - bg.GetImage().GetHeight() / 2);
+index = 1;
 
 fun update ()
 {
-    t++;
 
 }
 
@@ -13,14 +17,14 @@ Plymouth.SetRefreshFunction (update);
 
 if (Plymouth.GetMode () == "boot"){
 ipb = Image ("Black Progress Bar.png");
-    pb = ipb.Scale (1 , 3);
+    pb = ipb.Scale (Window.GetWidth ()/ 3.03, Window.GetHeight() /24);
     pb = Sprite (ipb);
     pb.SetX (Window.GetWidth ()  / 2 - 50);
     pb.SetY ((Window.GetHeight() * (2/3)) - ipb.GetHeight() / 2);
 
     fun progress_callback (duration, progress)
     {
-         pb.SetImage(ipb.Scale ( progress * 100, 3));
+         pb.SetImage(ipb.Scale ( progress * 1000, Window.GetHeight() /24));
     }
     Plymouth.SetBootProgressFunction(progress_callback);
 }else if (Plymouth.GetMode () == "shutdown"){
